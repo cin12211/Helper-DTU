@@ -23422,7 +23422,7 @@ const runRegistration = async (course, captcha) => {
     parsed
   );
 
-  if (result.status && result.d != "Phiên Đăng ký không hợp lệ!") {
+  if (result.status && result.d != "Phiên Đăng ký không hợp lệ!" && result.d != "Không tồn tại Lớp này.") {
     showMessage(true, "Đăng ký thành công");
     info.innerHTML = result.d;
   } else {
@@ -23478,7 +23478,10 @@ async function addCourse(course) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(`#btn-registration-${course}`).click((e) => {
       const captcha = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#input-captcha").val();
 
-      if (captcha) runRegistration(course, captcha.trim());
+      if (captcha && studentId && course ){ runRegistration(course, captcha.trim());}
+      else{
+        info.innerHTML = "<div class='text-danger'>Vui lòng xem lại thông tin mã sinh viên, mã môn học, mã captcha</div>";
+      }
     });
   }
 }
@@ -23499,6 +23502,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(async function () 
     apiKey && jquery__WEBPACK_IMPORTED_MODULE_0___default()("#code-api").val(apiKey);
 
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#student-id").on("change", function () {
+      studentId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val().trim();
       localStorage.setItem("studentId", jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val());
     });
 
