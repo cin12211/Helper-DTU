@@ -23423,7 +23423,7 @@ const runRegistration = async (course, captcha) => {
   );
 
   if (result.status && result.d != "Phiên Đăng ký không hợp lệ!" && result.d != "Không tồn tại Lớp này.") {
-    showMessage(true, "Đăng ký thành công");
+    // showMessage(true, "Đăng ký thành công");
     info.innerHTML = result.d;
   } else {
     showMessage(false, "Đăng ký thất bại ");
