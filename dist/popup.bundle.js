@@ -23422,8 +23422,11 @@ const runRegistration = async (course, captcha) => {
     parsed
   );
 
-  if (result.status && result.d != "Phiên Đăng ký không hợp lệ!" && result.d != "Không tồn tại Lớp này.") {
-    // showMessage(true, "Đăng ký thành công");
+  if (
+    result.status &&
+    result.d == "Đăng ký Thành công"
+  ) {
+    showMessage(true, "Đăng ký thành công ^^");
     info.innerHTML = result.d;
   } else {
     showMessage(false, "Đăng ký thất bại ");
@@ -23478,13 +23481,37 @@ async function addCourse(course) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(`#btn-registration-${course}`).click((e) => {
       const captcha = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#input-captcha").val();
 
-      if (captcha && studentId && course ){ runRegistration(course, captcha.trim());}
-      else{
-        info.innerHTML = "<div class='text-danger'>Vui lòng xem lại thông tin mã sinh viên, mã môn học, mã captcha</div>";
+      if (captcha && studentId && course) {
+        runRegistration(course, captcha.trim());
+      } else {
+        info.innerHTML =
+          "<div class='text-danger'>Vui lòng xem lại thông tin mã sinh viên, mã môn học, mã captcha</div>";
       }
     });
   }
 }
+
+const setUpTab = () => {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-1").show();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-2").hide();
+
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-2").on("click", () => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-1").hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-2").show();
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-1").removeClass("active");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-2").addClass("active");
+
+  });
+
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-1").on("click", () => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-1").show();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#tab-2").hide();
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-2").removeClass("active");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#choose-tab-1").addClass("active");
+  });
+};
 
 // main -----------------------
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(async function () {
@@ -23511,13 +23538,22 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(async function () 
       addCourse(course);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()("#ip-id-course").val("");
     });
+
+    //
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-test").on("click", () => {
+      console.log("----");
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, "danh-gia-giang-vien");
+      });
+    });
+    setUpTab();
   } else {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#warning").show();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#info-user").hide();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("#input-add-course").addClass("d-none");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#btn-test").hide();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#nav-bar").hide();
   }
-
-  // info.innerHTML = url.hostname;
 });
 
 })();

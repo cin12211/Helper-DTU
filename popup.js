@@ -68,11 +68,14 @@ const runRegistration = async (course, captcha) => {
     parsed
   );
 
-  if (result.status && result.d != "Phiên Đăng ký không hợp lệ!" && result.d != "Không tồn tại Lớp này.") {
-    // showMessage(true, "Đăng ký thành công");
+  if (
+    result.status &&
+    result.d == "Đăng ký Thành công"
+  ) {
+    showMessage(true, "Đăng ký thành công ^^");
     info.innerHTML = result.d;
   } else {
-    // showMessage(false, "Đăng ký thất bại ");
+    showMessage(false, "Đăng ký thất bại ");
     info.innerHTML = `<span class='text-danger'>${result.d}</span> `;
   }
 };
@@ -124,13 +127,37 @@ async function addCourse(course) {
     $(`#btn-registration-${course}`).click((e) => {
       const captcha = $("#input-captcha").val();
 
-      if (captcha && studentId && course ){ runRegistration(course, captcha.trim());}
-      else{
-        info.innerHTML = "<div class='text-danger'>Vui lòng xem lại thông tin mã sinh viên, mã môn học, mã captcha</div>";
+      if (captcha && studentId && course) {
+        runRegistration(course, captcha.trim());
+      } else {
+        info.innerHTML =
+          "<div class='text-danger'>Vui lòng xem lại thông tin mã sinh viên, mã môn học, mã captcha</div>";
       }
     });
   }
 }
+
+const setUpTab = () => {
+  $("#tab-1").show();
+  $("#tab-2").hide();
+
+  $("#choose-tab-2").on("click", () => {
+    $("#tab-1").hide();
+    $("#tab-2").show();
+
+    $("#choose-tab-1").removeClass("active");
+    $("#choose-tab-2").addClass("active");
+
+  });
+
+  $("#choose-tab-1").on("click", () => {
+    $("#tab-1").show();
+    $("#tab-2").hide();
+
+    $("#choose-tab-2").removeClass("active");
+    $("#choose-tab-1").addClass("active");
+  });
+};
 
 // main -----------------------
 $(document).ready(async function () {
@@ -157,11 +184,20 @@ $(document).ready(async function () {
       addCourse(course);
       $("#ip-id-course").val("");
     });
+
+    //
+    $("#btn-test").on("click", () => {
+      console.log("----");
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, "danh-gia-giang-vien");
+      });
+    });
+    setUpTab();
   } else {
     $("#warning").show();
     $("#info-user").hide();
     $("#input-add-course").addClass("d-none");
+    $("#btn-test").hide();
+    $("#nav-bar").hide();
   }
-
-  // info.innerHTML = url.hostname;
 });

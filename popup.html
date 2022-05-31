@@ -14,75 +14,98 @@
   </head>
 
   <body
-    style="max-width: 300px; width: 300px; max-height: 400px; height: 400px"
+    style="max-width: 300px; width: 300px; max-height: 450px; height: 450px"
     class="p-2"
   >
-    <!-- show err -->
-    <div
-      class="alert alert-success d-flex justify-content-between d-none position-absolute top-2 end-0"
-      role="alert"
-      id="alert-success"
-    >
-      Đăng kí thành công
-    </div>
+    <ul class="nav nav-tabs" id="nav-bar">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="choose-tab-1"
+          aria-current="page"
+          href="#"
+          >Tín Chỉ</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="choose-tab-2" href="#">Khác</a>
+      </li>
+    </ul>
 
-    <div
-      class="alert alert-danger d-flex justify-content-between d-none position-absolute top-2 end-0"
-      id="alert-danger"
-      role="alert"
-    >
-      Đăng kí thất bại
-    </div>
-
-    <div
-      class="alert alert-warning position-absolute top-2 end-0"
-      id="warning"
-      role="alert"
-    >
-      This extention only for Dtu !
-    </div>
-
-    <div
-      class="alert alert-warning position-absolute top-2 end-0"
-      id="warning-have-course"
-      role="alert"
-    >
-      Bạn đã chọn môn học rồi ! Xóa rồi chọn môn khác ^^
-    </div>
-    <!-- err -->
-
-    <div id="info-user" class="pt-2">
-      <span id="name">Mã sinh viên của bạn</span>
-      <input
-        type="text"
-        class="form-control"
-        id="student-id"
-        placeholder="Your Student Id"
-      />
-    </div>
-
-    <div class="d-flex justify-content-between mt-2" id="input-add-course">
-      <input
-        type="email"
-        class="form-control"
-        id="ip-id-course"
-        placeholder="Mã môn học "
-      />
-      <button type="button" class="btn btn-success" id="btn-add-id-course">
-        Chọn
-      </button>
-    </div>
-
-    <div>
-      <div class="d-flex justify-content-center pt-3">
-        <img id="img-captcha" />
+    <div id="tab-1">
+      <!-- show err -->
+      <div
+        class="alert alert-success d-flex justify-content-between d-none position-absolute top-2 end-0"
+        role="alert"
+        id="alert-success"
+      >
+        Đăng kí thành công
       </div>
 
-      <ul class="list-group mt-2" id="list-course"></ul>
+      <div
+        class="alert alert-danger d-flex justify-content-between d-none position-absolute top-2 end-0"
+        id="alert-danger"
+        role="alert"
+      >
+        Đăng kí thất bại
+      </div>
+
+      <div
+        class="alert alert-warning position-absolute top-2 end-0"
+        id="warning"
+        role="alert"
+      >
+        This extention only for Dtu !
+      </div>
+
+      <div
+        class="alert alert-warning position-absolute top-2 end-0"
+        id="warning-have-course"
+        role="alert"
+      >
+        Bạn đã chọn môn học rồi ! Xóa rồi chọn môn khác ^^
+      </div>
+      <!-- err -->
+
+      <div id="info-user" class="pt-2">
+        <span id="name">Mã sinh viên của bạn</span>
+        <input
+          type="text"
+          class="form-control"
+          id="student-id"
+          placeholder="Your Student Id"
+        />
+      </div>
+
+      <div class="d-flex justify-content-between mt-2" id="input-add-course">
+        <input
+          type="email"
+          class="form-control"
+          id="ip-id-course"
+          placeholder="Mã môn học "
+        />
+        <button type="button" class="btn btn-success" id="btn-add-id-course">
+          Chọn
+        </button>
+      </div>
+
+      <div>
+        <div class="d-flex justify-content-center pt-3">
+          <img id="img-captcha" />
+        </div>
+
+        <ul class="list-group mt-2" id="list-course"></ul>
+      </div>
+
+      <div id="info"></div>
+      <div id="infoCookie"></div>
     </div>
 
-    <div id="info"></div>
-    <div id="infoCookie"></div>
+    <div id="tab-2">
+      <button id="btn-test" class="btn btn-success mt-5">
+        Đánh giá giảng viên
+      </button>
+    </div>
 
     <div class="fixed-bottom d-flex justify-content-between px-2 py-2">
       <a
