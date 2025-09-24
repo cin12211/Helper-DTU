@@ -1,4 +1,4 @@
-# Helper-DTU
+# Helper-DTU (Đừng quên thả cho tớ 1  **star** ⭐ nha)
 
 ## How to use this tool
 
